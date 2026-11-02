@@ -6,8 +6,8 @@ Minecraft 字幕高亮模组 - 为字幕添加颜色和样式，提升游戏体�
 
 ## 项目信息
 - **模组 ID**: `subtitle_highlight`
-- **主包名**: `Yeah_Zero.Subtitle_Highlight`
-- **作者**: Yeah-Zero，Qituo，Yifei
+- **主包名**: `Yeah_Zero.Subtitle_Highlight`（26.2 版本为 `SakuraiFubuki.Subtitle_Highlight`）
+- **作者**: SakuraiFubuki，Yeah-Zero，Qituo，Yifei
 - **协议**: GNU LGPLv3
 
 ## 功能特性
@@ -20,11 +20,27 @@ Minecraft 字幕高亮模组 - 为字幕添加颜色和样式，提升游戏体�
 - ⌨️ **快捷键支持**：快速调整字幕设置
 
 ## 支持版本
-- Minecraft 1.21.11 (Fabric) - 主项目
+- Minecraft 26.2 (Fabric) - 主项目,位于 `26.2/` 目录（主包名 `SakuraiFubuki.Subtitle_Highlight`）
+- Minecraft 1.21.11 (Fabric) - 位于 `1.21.11/` 目录
 - Minecraft 1.21.10 (Fabric) - 位于 `1.21.10/` 目录
 - Minecraft 1.21.4 (Fabric) - 位于 `1.21.4/` 目录
 - Minecraft 1.21.1 (Fabric) - 位于 `1.21.1/` 目录
 - Minecraft 1.20.6 (Fabric) - 位于 `1.20.6/` 目录
+
+## 26.2 版本说明
+26.2 版本单独位于 `26.2/` 目录，为独立工程，可直接构建：
+
+```bash
+cd 26.2
+./gradlew build        # Windows: gradlew.bat build
+```
+
+产物为 `26.2/build/libs/Subtitle-Highlight-26.2-1.0.3-rc.2-26.2.jar`。
+
+- 依赖：Fabric Loader ≥ 0.19.3、Fabric API（26.2 线）、Cloth Config（可选 ModMenu 提供配置界面）
+- 仓库地址：https://github.com/SakuraiFubuki/Minecraft-SubtitleHighlightUnofficialReset-Fabric-26.2
+- 26.2 版本原版重写了字幕 HUD（`SubtitlesHud` → `SubtitleOverlay` + `GuiGraphicsExtractor`），
+  相关 Mixin 已按新结构重做，功能与 1.21.x 版本一致。
 
 ## 安装方法
 1. 安装 Fabric Loader

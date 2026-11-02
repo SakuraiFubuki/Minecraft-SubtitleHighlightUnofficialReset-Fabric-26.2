@@ -1,0 +1,44 @@
+{
+	"schemaVersion": 1,
+	"id": "subtitle_highlight",
+	"version": "${version}",
+	"name": "Subtitle Highlight",
+	"description": "为不同字幕添加样式以区分，同时提供对单个字幕的自定义设置。",
+	"authors": [
+		"SakuraiFubuki",
+		"Yeah-Zero",
+		"Qituo",
+		"Yifei"
+	],
+	"contact": {
+		"homepage": "https://github.com/SakuraiFubuki/Minecraft-SubtitleHighlightUnofficialReset-Fabric-26.2",
+		"issues": "https://github.com/SakuraiFubuki/Minecraft-SubtitleHighlightUnofficialReset-Fabric-26.2/issues"
+	},
+	"license": "LGPL-3.0",
+	"icon": "assets/subtitle_highlight/textures/gui/logo.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"SakuraiFubuki.Subtitle_Highlight.Initializer"
+		],
+		"modmenu": [
+			"SakuraiFubuki.Subtitle_Highlight.Configure.ScreenAPI"
+		]
+	},
+	"mixins": [
+		{
+			"config": "subtitle_highlight.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"cloth-config": "*",
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*"
+	}
+}
