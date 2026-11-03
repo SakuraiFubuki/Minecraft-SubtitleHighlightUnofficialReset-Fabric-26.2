@@ -20,6 +20,13 @@ public class Settings {
     public float bottomMargin = 30;
     public float sideMargin = 1;
     public Boolean ikunEasterEgg = true;
+    /**
+     * 同种字幕是否分行显示（每个声音源各占一行）。
+     *
+     * <p>{@code false}（默认）：同一种字幕只显示一行，重复触发时刷新计时而不再新开一行。</p>
+     * <p>{@code true}：同一种字幕的每个声音源都单独占一行（移植后曾作为默认行为）。</p>
+     */
+    public Boolean separateSameSubtitle = false;
     public ColorSetting colorSettings = new ColorSetting();
     public ArrayList<Custom> customList = new ArrayList<>();
 

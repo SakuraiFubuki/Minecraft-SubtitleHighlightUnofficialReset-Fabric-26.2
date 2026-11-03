@@ -123,6 +123,32 @@ public class SubtitleOverlayMixin {
     }
 
     /**
+     * 同种字幕要不要分行显示。
+     *
+     * <p>原版 {@code onPlaySound} 用 {@code subtitle.getText().equals(text)} 判断「这条字幕已经有了」，
+     * 命中就 {@code refresh()} 刷新计时而不是新开一行。但本模组会给字幕文本套样式色
+     * （见 {@link SubtitleEntryMixin}），带样式的新组件与原版文本不相等，于是原版去重永远失配
+     * ——同一种字幕的每个声音源都会单独占一行。</p>
+     *
+     * <p>这里在「合并模式」（{@code separateSameSubtitle = false}，默认值）下把这次比较改成按可见文本比，
+     * 让原版去重重新生效：同种字幕只占一行。开启开关时才保持原样的严格比较，恢复分行行为。</p>
+     */
+    @Redirect(method = "onPlaySound",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/network/chat/Component;equals(Ljava/lang/Object;)Z"))
+    private boolean subtitle_highlight$compareSubtitleText(Component self, Object other) {
+        if (Boolean.TRUE.equals(Manager.settings.separateSameSubtitle)) {
+            return self.equals(other);
+        }
+        return subtitle_highlight$visibleText(self).equals(subtitle_highlight$visibleText(other));
+    }
+
+    /** 取字幕的可见文本（翻译已解析、样式忽略），用于「合并模式」下的同种判重。 */
+    @Unique
+    private static String subtitle_highlight$visibleText(Object component) {
+        return component instanceof Component c ? c.getString() : String.valueOf(component);
+    }
+
+    /**
      * 字幕文字。原版把整段文字当成纯白并按亮度压暗，这里改为：
      * 取字幕自身样式颜色（由 {@link SubtitleEntryMixin} 按读音类型着色），
      * 按同一淡出进度插值后作为最终 ARGB；文字本身去掉样式色以免覆盖 int 颜色。

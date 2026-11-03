@@ -88,6 +88,12 @@ public class CommandManager {
                 )
                 .executes(CommandManager::getIkuneasterEgg)
             )
+            .then(literal("separateSameSubtitle")
+                .then(argument("value", StringArgumentType.string())
+                    .executes(CommandManager::setSeparateSameSubtitle)
+                )
+                .executes(CommandManager::getSeparateSameSubtitle)
+            )
             .executes(CommandManager::showHelp)
         );
     }
@@ -201,6 +207,22 @@ public class CommandManager {
         return 1;
     }
 
+    /** 同种字幕是否分行显示：true = 每个声音源各占一行（默认），false = 同种只显示一行。 */
+    private static int setSeparateSameSubtitle(CommandContext<FabricClientCommandSource> context) {
+        String value = StringArgumentType.getString(context, "value");
+        boolean boolValue = value.equalsIgnoreCase("true") || value.equalsIgnoreCase("on") || value.equalsIgnoreCase("yes");
+        Manager.settings.separateSameSubtitle = boolValue;
+        Manager.save();
+        context.getSource().sendFeedback(Component.translatable("subtitle_highlight.command.separateSameSubtitle.set", boolValue ? Component.translatable("subtitle_highlight.command.enabled") : Component.translatable("subtitle_highlight.command.disabled")));
+        return 1;
+    }
+
+    private static int getSeparateSameSubtitle(CommandContext<FabricClientCommandSource> context) {
+        boolean value = Boolean.TRUE.equals(Manager.settings.separateSameSubtitle);
+        context.getSource().sendFeedback(Component.translatable("subtitle_highlight.command.separateSameSubtitle.get", value ? Component.translatable("subtitle_highlight.command.enabled") : Component.translatable("subtitle_highlight.command.disabled")));
+        return 1;
+    }
+
     private static int showHelp(CommandContext<FabricClientCommandSource> context) {
         context.getSource().sendFeedback(Component.translatable("subtitle_highlight.command.help.title"));
         context.getSource().sendFeedback(Component.translatable("subtitle_highlight.command.help.reload"));
@@ -213,6 +235,7 @@ public class CommandManager {
         context.getSource().sendFeedback(Component.translatable("subtitle_highlight.command.help.startRatio"));
         context.getSource().sendFeedback(Component.translatable("subtitle_highlight.command.help.endRatio"));
         context.getSource().sendFeedback(Component.translatable("subtitle_highlight.command.help.ikunEasterEgg"));
+        context.getSource().sendFeedback(Component.translatable("subtitle_highlight.command.help.separateSameSubtitle"));
         return 1;
     }
 }

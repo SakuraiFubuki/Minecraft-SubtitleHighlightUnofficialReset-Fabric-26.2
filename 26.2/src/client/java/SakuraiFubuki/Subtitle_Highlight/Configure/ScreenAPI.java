@@ -64,6 +64,9 @@ public class ScreenAPI implements ModMenuApi {
                         .addEntry(builder.entryBuilder().startBooleanToggle(Component.translatable("subtitle_highlight.configure.general.ikun"), Manager.settings.ikunEasterEgg).setTooltip(Component.translatable("subtitle_highlight.configure.general.ikun.tooltip_1"), Component.translatable("subtitle_highlight.configure.general.ikun.tooltip_2")).setDefaultValue(true).setSaveConsumer((newValue) -> {
                             Manager.settings.ikunEasterEgg = newValue;
                         }).build())
+                        .addEntry(builder.entryBuilder().startBooleanToggle(Component.translatable("subtitle_highlight.configure.general.separate_same_subtitle"), Boolean.TRUE.equals(Manager.settings.separateSameSubtitle)).setTooltip(Component.translatable("subtitle_highlight.configure.general.separate_same_subtitle.tooltip_1"), Component.translatable("subtitle_highlight.configure.general.separate_same_subtitle.tooltip_2")).setDefaultValue(false).setSaveConsumer((newValue) -> {
+                            Manager.settings.separateSameSubtitle = newValue;
+                        }).build())
                         .setDescription(() -> Optional.of(new FormattedText[]{Component.translatable("subtitle_highlight.configure.general.description")}));
 
                 SubCategoryBuilder colorSettings = builder.entryBuilder().startSubCategory(Component.translatable("subtitle_highlight.configure.general.color")).setTooltip(Component.translatable("subtitle_highlight.configure.general.color.tooltip")).setExpanded(true);
