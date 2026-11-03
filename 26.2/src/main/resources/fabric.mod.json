@@ -5,10 +5,10 @@
 	"name": "Subtitle Highlight",
 	"description": "为不同字幕添加样式以区分，同时提供对单个字幕的自定义设置。",
 	"authors": [
-		"SakuraiFubuki",
 		"Yeah-Zero",
 		"Qituo",
-		"Yifei"
+		"Yifei",
+		"SakuraiFubuki"
 	],
 	"contact": {
 		"homepage": "https://github.com/SakuraiFubuki/Minecraft-SubtitleHighlightUnofficialReset-Fabric-26.2",
